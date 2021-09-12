@@ -2,7 +2,8 @@ import React, { createContext, useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import Peer from "simple-peer";
 const StateContext = createContext();
-const socket = io("http://localhost:8080");
+// const socket = io("http://localhost:8080");
+const socket = io("https://video-chat-app-adi.herokuapp.com/");
 
 const StateProvider = ({ children }) => {
   const [stream, setStream] = useState(null);
