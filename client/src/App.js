@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import "./App.css";
+import ChatContainer from "./components/ChatContainer";
 import MainVideo from "./components/MainVideo";
 import Notifications from "./components/Notifications";
 import Options from "./components/Options";
@@ -13,6 +14,7 @@ function App() {
             <MainVideo />
           </Grid>
           <Grid item xs={8}>
+            <ChatContainer />
             <Options>
               <Notifications />
             </Options>

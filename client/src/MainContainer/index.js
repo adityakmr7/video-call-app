@@ -1,6 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { makeStyles } from "@mui/material";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -9,7 +8,7 @@ import Typography from "@mui/material/Typography";
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const styles = {
   root: {
     display: "flex",
     flexDirection: "column",
@@ -26,20 +25,17 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  // toolbar: theme.mixins.toolbar,
   content: {
     // flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
+    // backgroundColor: theme.palette.background.default,
     // padding: theme.spacing(3),
   },
-}));
+};
 
 export default function PermanentDrawerRight({ children }) {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
-      <CssBaseline />
+    <div sx={styles.root}>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
@@ -49,7 +45,7 @@ export default function PermanentDrawerRight({ children }) {
           </Toolbar>
         </AppBar>
       </Box>
-      <main className={classes.content}>{children}</main>
+      <main sx={styles.content}>{children}</main>
     </div>
   );
 }
