@@ -1,4 +1,6 @@
 import { Button } from "@material-ui/core";
+import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useContext } from "react";
 import { StateContext } from "../../context/StateProvider";
 
@@ -8,11 +10,13 @@ function Notifications() {
   return (
     <>
       {call?.isReceivedCall && !callAccepted && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <h1>{call.name} is calling</h1>
-          <Button onClick={answerCall} variant="contained">
-            Answer
-          </Button>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Typography>{call.name} is calling</Typography>
+          <Box marginX={4}>
+            <Button color="primary" onClick={answerCall} variant="contained">
+              Answer
+            </Button>
+          </Box>
         </div>
       )}
     </>

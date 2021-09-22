@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import "./App.css";
 import MainVideo from "./components/MainVideo";
 import Notifications from "./components/Notifications";
@@ -7,10 +8,16 @@ function App() {
   return (
     <div>
       <MainContainer>
-        <MainVideo />
-        <Options>
-          <Notifications />
-        </Options>
+        <Grid container>
+          <Grid item xs={4}>
+            <MainVideo />
+          </Grid>
+          <Grid item xs={8}>
+            <Options>
+              <Notifications />
+            </Options>
+          </Grid>
+        </Grid>
       </MainContainer>
     </div>
   );

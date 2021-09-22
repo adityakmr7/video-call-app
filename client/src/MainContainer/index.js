@@ -1,16 +1,18 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { Grid } from "@material-ui/core";
-import MicIcon from "@material-ui/icons/Mic";
-import { MicOff, Videocam, VideocamOff } from "@material-ui/icons";
-import AppDrawer from "../components/AppDrawer";
+
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    flexDirection: "column",
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -26,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   content: {
-    flexGrow: 1,
+    // flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     // padding: theme.spacing(3),
   },
@@ -38,38 +40,16 @@ export default function PermanentDrawerRight({ children }) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <main className={classes.content}>
-        {children}
-        {/* <div
-
-          style={{
-            // backgroundColor: "#000000",
-            position: "absolute",
-            width: "80%",
-            bottom: 0,
-            height: 80,
-          }}
-        >
-          <Grid container justifyContent="space-between" alignItems="center">
-            <Grid item>
-              <MicIcon />
-              <MicOff />
-              <Videocam />
-              <VideocamOff />
-            </Grid>
-            <Grid item>
-              <MicIcon />
-              <MicOff />
-              <Videocam />
-              <VideocamOff />
-            </Grid>
-            <Grid item>
-              <h1>Leave Meeting</h1>
-            </Grid>
-          </Grid>
-        </div> */}
-      </main>
-      {/* <AppDrawer /> */}
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Video Call
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      <main className={classes.content}>{children}</main>
     </div>
   );
 }
