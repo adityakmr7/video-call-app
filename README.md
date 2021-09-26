@@ -1,4 +1,4 @@
-## Video chat application
+# video-call-app
 
 - Server is at https://video-chat-app-adi.herokuapp.com/
 
