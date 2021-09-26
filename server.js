@@ -17,6 +17,8 @@ app.get("/", (req, res) => {
   res.send("SERVER IS RUNNING");
 });
 
+let store = [];
+
 io.on("connection", (socket) => {
   socket.emit("me", socket.id);
 
@@ -28,6 +30,14 @@ io.on("connection", (socket) => {
   });
   socket.on("answerCall", (data) => {
     io.to(data.to).emit("callAccepted", data.signal);
+  });
+  socket.on("chat", (data) => {
+    let obj = {};
+    obj.id = data.id;
+    obj.message = data.message;
+    obj.isSend = true;
+    store.push(obj);
+    io.emit("chat", store);
   });
 });
 

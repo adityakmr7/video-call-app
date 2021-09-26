@@ -2,8 +2,8 @@ import React, { createContext, useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import Peer from "simple-peer";
 const StateContext = createContext();
-// const socket = io("http://localhost:8080");
-const socket = io("https://video-chat-app-adi.herokuapp.com/");
+const socket = io("http://localhost:8080");
+// const socket = io("https://video-chat-app-adi.herokuapp.com/");
 
 const StateProvider = ({ children }) => {
   const [stream, setStream] = useState(null);
@@ -12,6 +12,7 @@ const StateProvider = ({ children }) => {
   const [callAccepted, setCallAccepted] = useState(false);
   const [callEnded, setCallEnded] = useState(false);
   const [name, setName] = useState("");
+  const [chat, setChat] = useState([]);
 
   const myVideo = useRef();
   const userVideo = useRef();
@@ -32,6 +33,9 @@ const StateProvider = ({ children }) => {
     socket.on("me", (id) => setMe(id));
     socket.on("callUser", ({ from, name: callerName, signal }) => {
       setCall({ isReceivedCall: true, from, name: callerName, signal });
+    });
+    socket.on("chat", (payload) => {
+      setChat(payload);
     });
   }, []);
   const answerCall = () => {
@@ -83,6 +87,19 @@ const StateProvider = ({ children }) => {
     window.location.reload();
   };
 
+  const sendMessage = (message) => {
+    console.info("SendMessage");
+    socket.emit("chat", {
+      message: message,
+      id: me,
+    });
+  };
+  // const receiveMessage = () => {
+  //   socket.emit("receiveMessage", {
+  //     message: "hello world",
+  //     id: 1,
+  //   });
+  // };
   return (
     <StateContext.Provider
       value={{
@@ -98,6 +115,9 @@ const StateProvider = ({ children }) => {
         callUser,
         leaveCall,
         answerCall,
+        sendMessage,
+        chat,
+        // receiveMessage,
       }}
     >
       {children}
